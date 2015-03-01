@@ -2,6 +2,8 @@
   <ion-content class="padding dashboard" scroll="false">
     <!--<div class="row row-center">-->
       <!--<div class="col">-->
+    <button ng-click="login()">login</button>
+    <br/><br/>
         <td-cards>
           <td-card ng-repeat="card in cards"
                    on-transition-right="like(card)"
