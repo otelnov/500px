@@ -185,6 +185,36 @@
                   'width=1240,height=480,left=' + left_offset + ',top=' + top_offset + ',menu=no,location=yes,scrollbars=no,status=no,toolbar=no');
     };
 
+    this.loginCordova = function (callback) {
+      if (!this.sdk_key) {
+        throw "login: SDK not initialized. Use _500px.init() first.";
+      }
+
+      var browserRef = window.open(site_url + 'api/js-sdk/authorize?sdk_key=' + this.sdk_key, '_blank');
+
+      browserRef.addEventListener('loadstart', function (event) {
+        if ((event.url).indexOf("http://example.com") === 0) {
+          var hash_string = (event.url).split("#")[1];
+          var token = /\:([^,]+),.*/g.exec(hash_string)[1];
+
+          oauth_token = token;
+          fire_event('authorization_obtained');
+
+          if (callback && typeof callback == 'function') {
+            callback.call(self, 'authorized');
+          }
+
+          browserRef.close();
+        }
+      });
+
+      browserRef.addEventListener('exit', function (event) {
+        if (callback && typeof callback == 'function') {
+          callback.call(self, 'dismiss');
+        }
+      });
+    };
+
     // authorize(callback)
     //
     // Alias for `login`.

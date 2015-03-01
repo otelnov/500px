@@ -32,32 +32,11 @@ angular.module('500px.controllers', [])
       });
     }
 
-
     $scope.login = function () {
       $ionicPlatform.ready(function () {
-        var browserRef = $window.open('https://api.500px.com/api/js-sdk/authorize?sdk_key=b4512a8c50b7f1cbea9765e16d0552095847d76d', '_blank');
-        browserRef.addEventListener('loadstart', function (event) {
-          if ((event.url).indexOf("http://example.com") === 0) {
-            console.log(event.url);
+        _500px.loginCordova(function(status) {
 
-            //var hash_string = window.location.hash.substring(1),
-            var hash_string = event.url,
-              parts = hash_string.split(','),
-              part,
-              result = {};
-            while (part = parts.shift()) {
-              part = part.split(':');
-              result[part[0]] = part[1] == undefined ? true : part[1];
-            }
-            console.log(result);
-
-            browserRef.close();
-          }
         });
-        browserRef.addEventListener('exit', function (event) {
-          //deferred.reject("The sign in flow was canceled");
-        });
-
       });
     }
 
