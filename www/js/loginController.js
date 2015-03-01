@@ -1,13 +1,12 @@
 angular.module('500px.controllers')
-
-  .controller('LoginCtrl', function ($scope, $state, $ionicPlatform) {
+  .controller('LoginCtrl', function ($scope, $state, $ionicPlatform, UserService) {
     $scope.login = function () {
-      $ionicPlatform.ready(function () {
-        _500px.loginCordova(function (status) {
-          if (status === 'authorized') {
-            $state.go('tab.dash');
-          }
+      UserService.current()
+        .then(function(user) {
+          console.log(user);
+          $state.go('tab.dash');
+        }, function(reason) {
+
         });
-      });
-    }
+    };
   });

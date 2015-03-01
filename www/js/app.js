@@ -49,5 +49,14 @@ angular.module('500px', [
           controller: 'FavouritesCtrl'
         }
       }
+    })
+    .state('tab.profile', {
+      url: '/profile',
+      views: {
+        'tab-profile': {
+          templateUrl: 'templates/tab-profile.html',
+          controller: 'ProfileCtrl'
+        }
+      }
     });
 });
