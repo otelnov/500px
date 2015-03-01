@@ -31,13 +31,4 @@ angular.module('500px.controllers')
         $scope.cards = response.data.photos.concat($scope.cards);
       });
     }
-
-    $scope.login = function () {
-      $ionicPlatform.ready(function () {
-        _500px.loginCordova(function(status) {
-
-        });
-      });
-    }
-
   });
