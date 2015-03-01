@@ -1,4 +1,4 @@
-angular.module('500px.controllers', [])
+angular.module('500px.controllers')
 
   .controller('FavouritesCtrl', function ($scope, $ionicLoading) {
 

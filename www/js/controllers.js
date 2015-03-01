@@ -75,21 +75,4 @@ angular.module('500px.controllers', [])
     }
 
 
-  })
-
-  .controller('FavouritesCtrl', function ($scope) {
-
-    $scope.images = [];
-    _500px.on('authorization_obtained', function () {
-      _500px.api('/users', function (response) {
-        //console.log(response);
-        var me = response.data.user;
-        // Get my favorites
-        _500px.api('/photos', {feature: 'user_favorites', user_id: me.id}, function (response) {
-          $scope.images = response.data.photos;
-          $scope.$apply();
-        });
-      });
-    });
-    _500px.getAuthorizationStatus();
   });
