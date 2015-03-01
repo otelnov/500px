@@ -12,7 +12,7 @@
       $500px.authorize()
         .then(function(api) {
           api("/users", function(response) {
-            user = response.data;
+            user = response.data.user;
             deferred.resolve(user);
           });
         }, function(reason) {
@@ -50,7 +50,7 @@
         if (status === "authorized") {
           deferred.resolve(_500px.api.bind(_500px));
         } else {
-          deferred.reject();
+          deferred.reject("unauthorized");
         }
       });
 
