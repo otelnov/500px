@@ -1,5 +1,13 @@
 <ion-view view-title="Favourites">
   <ion-content>
-    123
+    <div class="list">
+
+      <a class="item item-thumbnail-left" href="#" ng-repeat="image in images">
+        <img ng-src="{{image.image_url}}">
+        <h2>{{image.name}}</h2>
+        <p>{{image.description}}</p>
+      </a>
+
+    </div>
   </ion-content>
 </ion-view>

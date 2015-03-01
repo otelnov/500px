@@ -1,5 +1,5 @@
 <ion-view view-title="Dashboard">
-  <ion-content class="padding">
+  <ion-content class="padding" scroll="false">
     <td-cards>
       <td-card ng-repeat="card in cards"
                on-destroy="cardDestroyed($index)"
@@ -8,12 +8,33 @@
                on-partial-swipe="cardPartialSwipe(amt)"
                class="card-{{$index}}">
         <div class="image">
-          <div class="no-text">NOPE</div>
-          <img ng-src="{{card.image}}">
-
-          <div class="yes-text">LIKE</div>
+          <div class="no-text"></div>
+          <img ng-src="{{card.image_url}}">
+          <div class="yes-text"></div>
         </div>
+
+        <!--<div class="list card">-->
+
+          <!--<div class="item item-avatar">-->
+            <!--<img ng-src="{{card.user.userpic_url}}">-->
+            <!--<h2>{{card.name}}</h2>-->
+            <!--<p>{{card.description}}</p>-->
+          <!--</div>-->
+
+          <!--<div class="item item-image">-->
+            <!--<img ng-src="{{card.image_url}}">-->
+          <!--</div>-->
+
+          <!--<a class="item item-icon-left assertive" href="#">-->
+            <!--<i class="icon ion-music-note"></i>-->
+            <!--Start listening-->
+          <!--</a>-->
+
+        <!--</div>-->
+
+
       </td-card>
     </td-cards>
+    {{current.name}}
   </ion-content>
 </ion-view>
