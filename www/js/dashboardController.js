@@ -1,6 +1,6 @@
 angular.module('500px.controllers')
 
-  .controller('DashCtrl', function ($scope, TDCardDelegate, $ionicLoading, $ionicPlatform, $window) {
+  .controller('DashCtrl', function ($scope, TDCardDelegate, $ionicLoading) {
 
     var page = 0;
     $scope.cards = [];

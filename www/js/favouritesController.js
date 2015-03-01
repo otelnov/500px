@@ -1,7 +1,10 @@
 angular.module('500px.controllers')
 
-  .controller('FavouritesCtrl', function ($scope, $ionicLoading, UserService) {
+  .controller('FavouritesCtrl', function ($scope, $ionicLoading, UserService, $state) {
     UserService.current(function (err, user) {
+      if (err || !user) {
+        return $state.go('login');
+      }
       var photos = [];
       $scope.rows = [];
       var storage = [];
