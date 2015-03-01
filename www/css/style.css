@@ -1,3 +1,9 @@
+.login-page{
+  background: url("../img/login.jpg") no-repeat;
+  background-size: cover;
+}
+
+
 td-cards {
   display: block;
 }

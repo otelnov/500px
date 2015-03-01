@@ -1,4 +1,4 @@
-angular.module('500px.services', [])
+angular.module('500px.services')
 
 //.factory('Chats', function() {
 //  var chats = [{

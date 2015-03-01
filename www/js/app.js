@@ -1,3 +1,6 @@
+angular.module('500px.controllers', []);
+angular.module('500px.services', []);
+
 angular.module('500px', [
   'ionic',
   '500px.controllers',
@@ -17,13 +20,17 @@ angular.module('500px', [
     }
   });
 }).config(function ($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/login');
 
   $stateProvider
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html',
+      controller: 'LoginCtrl'
+    })
     .state('tab', {
-      url: "/tab",
       abstract: true,
-      templateUrl: "templates/tabs.html"
+      templateUrl: 'templates/tabs.html'
     })
     .state('tab.dash', {
       url: '/dash',
