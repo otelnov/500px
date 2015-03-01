@@ -65,3 +65,22 @@ td-card img {
   transition: 0.2s opacity linear;
   opacity: 0;
 }
+
+
+
+.favourites img{
+  width: 100%;
+}
+
+.favourites{
+  background: #121212;
+}
+
+.favourites .col {
+  padding: 2px;
+}
+
+.favourites .row {
+  /*padding: 2px;*/
+  padding-bottom: 0;
+}
