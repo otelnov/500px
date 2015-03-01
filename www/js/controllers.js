@@ -1,10 +1,11 @@
 angular.module('500px.controllers', [])
 
-  .controller('DashCtrl', function ($scope, TDCardDelegate, $ionicLoading, $ionicPlatform) {
+  .controller('DashCtrl', function ($scope, TDCardDelegate, $ionicLoading, $ionicPlatform, $window) {
 
-    $ionicPlatform.ready(function() {
-      var browserRef = window.open(
-        'https://api.500px.com/api/js-sdk/authorize?sdk_key=b4512a8c50b7f1cbea9765e16d0552095847d76d&callback=_500pxCallback');
+    var authUrl = 'https://api.500px.com/api/js-sdk/authorize?sdk_key=b4512a8c50b7f1cbea9765e16d0552095847d76d&redirectUrl=http://localhost:8100/callback.html';
+
+    $window.document.addEventListener("deviceready", function() {
+      var browserRef = window.open("", "_blank");
 
       browserRef.addEventListener("loadstart", function(event) {
           if((event.url).indexOf('localhost/callback') === 0) {
@@ -13,18 +14,18 @@ angular.module('500px.controllers', [])
 
               browserRef.close();
           }
-      });
+      }, true);
 
       browserRef.addEventListener('exit', function(event) {
           console.error("The sign in flow was canceled");
-      });
+      }, true);
 
       browserRef.addEventListener('message', function(e) {
         console.log(e);
       }, true);
+
+      browserRef.location.assign(authUrl);
     });
-
-
 
     $ionicLoading.show({
       template: 'Loading...'
