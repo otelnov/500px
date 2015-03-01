@@ -68,11 +68,12 @@ td-card img {
 
 
 
+
 .favourites img{
   width: 100%;
 }
 
-.favourites{
+.favourites, .dashboard{
   background: #121212;
 }
 
