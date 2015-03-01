@@ -1,8 +1,8 @@
 angular.module('500px.controllers')
 
   .controller('FavouritesCtrl', function ($scope, $ionicLoading, UserService, $state) {
-    UserService.current(function (err, user) {
-      if (err || !user) {
+    UserService.current().then(function (user) {
+      if (!user) {
         return $state.go('login');
       }
       var photos = [];
