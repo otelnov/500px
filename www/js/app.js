@@ -2,7 +2,8 @@ angular.module('500px', [
   'ionic',
   '500px.controllers',
   '500px.services',
-  'ionic.contrib.ui.tinderCards'
+  'ionic.contrib.ui.tinderCards',
+  'ngCordova'
 ]).run(function ($ionicPlatform) {
   $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
