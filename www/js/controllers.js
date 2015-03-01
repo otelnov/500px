@@ -1,26 +1,30 @@
 angular.module('500px.controllers', [])
 
-  .controller('DashCtrl', function ($scope, TDCardDelegate, $ionicLoading, $http) {
+  .controller('DashCtrl', function ($scope, TDCardDelegate, $ionicLoading, $ionicPlatform) {
 
-    var browserRef = window.open(
-      'https://api.500px.com/api/js-sdk/authorize?sdk_key=b4512a8c50b7f1cbea9765e16d0552095847d76d&callback=_500pxCallback');
+    $ionicPlatform.ready(function() {
+      var browserRef = window.open(
+        'https://api.500px.com/api/js-sdk/authorize?sdk_key=b4512a8c50b7f1cbea9765e16d0552095847d76d&callback=_500pxCallback');
 
-    browserRef.addEventListener("loadstart", function(event) {
-        if((event.url).indexOf('localhost/callback') === 0) {
-            var requestToken = (event.url).split("code=")[1];
-            console.log(event.url);
+      browserRef.addEventListener("loadstart", function(event) {
+          if((event.url).indexOf('localhost/callback') === 0) {
+              var requestToken = (event.url).split("code=")[1];
+              console.log(event.url);
 
-            browserRef.close();
-        }
+              browserRef.close();
+          }
+      });
+
+      browserRef.addEventListener('exit', function(event) {
+          console.error("The sign in flow was canceled");
+      });
+
+      browserRef.addEventListener('message', function(e) {
+        console.log(e);
+      }, true);
     });
 
-    browserRef.addEventListener('exit', function(event) {
-        console.error("The sign in flow was canceled");
-    });
 
-    browserRef.addEventListener('message', function(e) {
-      console.log(e);
-    }, true);
 
     $ionicLoading.show({
       template: 'Loading...'
@@ -75,21 +79,4 @@ angular.module('500px.controllers', [])
     }
 
 
-  })
-
-  .controller('FavouritesCtrl', function ($scope) {
-
-    $scope.images = [];
-    _500px.on('authorization_obtained', function () {
-      _500px.api('/users', function (response) {
-        //console.log(response);
-        var me = response.data.user;
-        // Get my favorites
-        _500px.api('/photos', {feature: 'user_favorites', user_id: me.id}, function (response) {
-          $scope.images = response.data.photos;
-          $scope.$apply();
-        });
-      });
-    });
-    _500px.getAuthorizationStatus();
   });
