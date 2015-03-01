@@ -7,7 +7,7 @@ angular.module('500px.controllers')
     loadMore();
 
     $scope.like = function (img) {
-      _500px.api('/photos/' + img.id + '/vote', 'post', {vote: 1}, function (response) {
+      _500px.api('/photos/' + img.id + '/favorite', 'post', function (response) {
         console.log(response);
       });
     };
