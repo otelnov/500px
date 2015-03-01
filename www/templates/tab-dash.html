@@ -1,36 +1,16 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding dashboard" scroll="false">
-    <!--<div class="row row-center">-->
-      <!--<div class="col">-->
-        <td-cards>
-          <td-card ng-repeat="card in cards"
-                   on-transition-right="like(card)"
-                   on-destroy="cardDestroyed($index)">
-            <div class="image">
-              <div class="no-text"></div>
-              <img ng-src="{{card.image_url}}">
+    <td-cards style="margin-top: {{cardsMT}}px">
+      <td-card ng-repeat="card in cards"
+               on-transition-right="like(card)"
+               on-destroy="cardDestroyed($index)">
+        <div class="image">
+          <div class="no-text"></div>
+          <img ng-src="{{card.image_url}}">
 
-              <div class="yes-text"></div>
-            </div>
-          </td-card>
-          <!--<td-card id="td-card"-->
-          <!--ng-repeat="card in cards"-->
-          <!--on-transition-left="transitionLeft(card)"-->
-          <!--on-transition-right="transitionRight(card)"-->
-          <!--on-transition-out="transitionOut(card)"-->
-          <!--on-destroy="cardDestroyed($index)"-->
-          <!--on-swipe-left="cardSwipedLeft($index)"-->
-          <!--on-swipe-right="cardSwipedRight($index)"-->
-          <!--on-partial-swipe="cardPartialSwipe(amt)"-->
-          <!--class="card-{{$index}}">-->
-          <!--<div class="image">-->
-          <!--<div class="no-text"></div>-->
-          <!--<img ng-src="{{card.image_url}}">-->
-          <!--<div class="yes-text"></div>-->
-          <!--</div>-->
-          <!--</td-card>-->
-        </td-cards>
-      <!--</div>-->
-    <!--</div>-->
+          <div class="yes-text"></div>
+        </div>
+      </td-card>
+    </td-cards>
   </ion-content>
 </ion-view>

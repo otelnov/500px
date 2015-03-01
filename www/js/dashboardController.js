@@ -1,6 +1,8 @@
 angular.module('500px.controllers')
 
-  .controller('DashCtrl', function ($scope, TDCardDelegate, $ionicLoading) {
+  .controller('DashCtrl', function ($scope, TDCardDelegate, $ionicLoading, $window) {
+
+    $scope.cardsMT = ($window.innerHeight - 100 - 300) / 2;
 
     var page = 0;
     $scope.cards = [];
