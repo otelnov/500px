@@ -1,21 +1,22 @@
-(function() {
+(function () {
   function _UserService($500px, $q) {
     var user;
 
     function getCurrent() {
       var deferred = $q.defer();
 
-      if(user) {
-        return deferred.resolve(user);
+      if (user) {
+        deferred.resolve(user);
+        return deferred.promise;
       }
 
       $500px.authorize()
-        .then(function(api) {
-          api("/users", function(response) {
+        .then(function (api) {
+          api("/users", function (response) {
             user = response.data.user;
             deferred.resolve(user);
           });
-        }, function(reason) {
+        }, function (reason) {
           deferred.reject(reason);
         });
 
@@ -36,6 +37,7 @@
       logout: logout
     };
   }
+
   _UserService.$inject = ["500px", "$q"];
 
   function _500pxService($q) {
@@ -44,7 +46,7 @@
     });
 
     function authorize() {
-       var deferred = $q.defer();
+      var deferred = $q.defer();
 
       _500px.loginCordova(function (status) {
         if (status === "authorized") {
@@ -66,6 +68,7 @@
       logout: logout
     };
   }
+
   _500pxService.$inject = ["$q"];
 
   angular.module("500px.services")
