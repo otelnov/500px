@@ -1,6 +1,7 @@
 angular.module('500px.controllers')
 
-  .controller('DashCtrl', function ($scope, TDCardDelegate, $ionicLoading, $window) {
+  .controller('DashCtrl', function ($scope, TDCardDelegate, $ionicLoading, $window,
+                                    ImageService) {
 
     $scope.cardsMT = ($window.innerHeight - 100 - 300) / 2;
 
@@ -10,7 +11,10 @@ angular.module('500px.controllers')
 
     $scope.like = function (img) {
       _500px.api('/photos/' + img.id + '/favorite', 'post', function (response) {
-        console.log(response);
+        if(!response.error && response.data.photo){
+          ImageService.setFav([response.data.photo], true);
+          ImageService.buildRows();
+        }
       });
     };
 
@@ -28,7 +32,11 @@ angular.module('500px.controllers')
       });
       page++;
 
-      _500px.api('/photos', {feature: 'popular', page: page, image_size: 3}, function (response) {
+      _500px.api('/photos', {
+        feature: 'popular',
+        page: page,
+        image_size: 3
+      }, function (response) {
         $ionicLoading.hide();
         $scope.cards = response.data.photos.concat($scope.cards);
       });

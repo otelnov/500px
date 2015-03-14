@@ -1,24 +1,15 @@
 angular.module('500px.controllers')
 
-  .controller('FavouritesCtrl', function ($scope, $ionicLoading, UserService, $state) {
+  .controller('FavouritesCtrl', function ($scope, $ionicLoading, UserService,
+                                          $state, ImageService) {
     UserService.current().then(function (user) {
       if (!user) {
         return $state.go('login');
       }
-      var photos = [];
-      $scope.rows = [];
-      var storage = [];
+      //$scope.rows = [];
+      $scope.rows = ImageService.getRows();
       var page = 0;
-
-      function genRows(array, columns) {
-        var rows = [];
-        var i, n, tempArray;
-        for (i = 0, n = array.length; i < n; i += columns) {
-          tempArray = array.slice(i, i + columns);
-          rows.push(tempArray);
-        }
-        return rows;
-      }
+      $scope.hasMoreData = true;
 
       $scope.loadMore = function () {
         page++;
@@ -29,17 +20,19 @@ angular.module('500px.controllers')
           image_size: 2,
           sort: 'created_at'
         }, function (response) {
-          $ionicLoading.hide();
-          photos = response.data.photos.concat(storage);
-          storage.length = 0;
-          var k = photos.length % 3;
-          for (var i = 0; i < k; i++) {
-            storage.push(photos[i]);
-            photos.splice(i, 1);
-          }
-          var rows = genRows(photos, 3);
-          $scope.rows = $scope.rows.concat(rows);
-          $scope.$broadcast('scroll.infiniteScrollComplete');
+          ImageService.setFav(response.data.photos).then(function (res) {
+            if (res.stop) {
+              $scope.hasMoreData = false;
+            }
+            //else{
+            //  $scope.rows = $scope.rows.length > 0
+            //    ? $scope.rows.concat(res.rows)
+            //    : res.rows;
+            //
+            //}
+            $ionicLoading.hide();
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          });
         });
       };
     });
