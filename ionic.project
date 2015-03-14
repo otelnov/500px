@@ -1,4 +1,11 @@
 {
-  "name": "The500px",
-  "app_id": ""
+  "name": "500px",
+  "app_id": "e94ebe82",
+  "browsers": [
+    {
+      "platform": "android",
+      "browser": "crosswalk",
+      "version": "11.40.277.1"
+    }
+  ]
 }
