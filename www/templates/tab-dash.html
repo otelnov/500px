@@ -1,12 +1,13 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding dashboard" scroll="false">
-    <td-cards style="margin-top: {{cardsMT}}px">
-      <td-card ng-repeat="card in cards"
+    <td-cards style="margin-top: {{::cardsMT}}px">
+      <td-card ng-repeat="card in cards track by card.id"
                on-transition-right="like(card)"
-               on-destroy="cardDestroyed($index)">
+               on-destroy="cardDestroyed($index)"
+               class="card-{{$index}}">
         <div class="image">
           <div class="no-text"></div>
-          <img ng-src="{{card.image_url}}">
+          <img ng-src="{{::card.image_url}}">
 
           <div class="yes-text"></div>
         </div>
