@@ -5,7 +5,6 @@ angular.module('500px', [
   'ionic',
   '500px.controllers',
   '500px.services',
-  'ionic.contrib.ui.tinderCards',
   'ngCordova'
 ]).run(function ($ionicPlatform) {
   $ionicPlatform.ready(function () {

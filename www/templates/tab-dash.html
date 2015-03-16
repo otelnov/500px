@@ -1,17 +1,12 @@
 <ion-view view-title="Dashboard">
-  <ion-content class="padding dashboard" scroll="false">
-    <td-cards style="margin-top: {{::cardsMT}}px">
-      <td-card ng-repeat="card in cards track by card.id"
-               on-transition-right="like(card)"
-               on-destroy="cardDestroyed($index)"
-               class="card-{{$index}}">
-        <div class="image">
-          <div class="no-text"></div>
-          <img ng-src="{{::card.image_url}}">
+  <ion-content class="dashboard"
+               scroll="false"
+               on-swipe-down="down()"
+               on-swipe-up="up()"
+               on-swipe-right="right()"
+               on-swipe-left="left()">
 
-          <div class="yes-text"></div>
-        </div>
-      </td-card>
-    </td-cards>
+    <img ng-style="imgStyles" ng-src="{{activeImage.image_url}}"/>
+
   </ion-content>
 </ion-view>
