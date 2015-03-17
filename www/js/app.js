@@ -49,6 +49,15 @@ angular.module('500px', [
         }
       }
     })
+    .state('tab.settings', {
+      url: '/settings',
+      views: {
+        'tab-profile': {
+          templateUrl: 'templates/tab-settings.html',
+          controller: 'SettingsCtrl'
+        }
+      }
+    })
     .state('tab.profile', {
       url: '/profile',
       views: {

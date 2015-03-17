@@ -55,7 +55,8 @@
 
     function genFavRows(images) {
       var deferred = $q.defer();
-      photos = photos.concat(images);
+      //photos = photos.concat(images);
+      photos = images;
 
       var i, n, tempArray;
       for (i = 0, n = photos.length; i < n; i += 3) {
@@ -63,7 +64,7 @@
         favouriteRows.push(tempArray);
       }
 
-      deferred.resolve();
+      deferred.resolve(favouriteRows);
       return deferred.promise;
     }
 
