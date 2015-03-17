@@ -59,10 +59,9 @@ angular.module('500px.controllers')
       var img = $scope.activeImage;
       setActive();
       _500px.api('/photos/' + img.id + '/favorite', 'post', function (response) {
-        //  if (!response.error && response.data.photo) {
-        //ImageService.setFav([response.data.photo], true);
-        //ImageService.buildRows();
-        //}
+        if (!response.error && response.data.photo) {
+          ImageService.updateFavRows(response.data.photo);
+        }
       });
     }
 
