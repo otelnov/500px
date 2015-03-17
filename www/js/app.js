@@ -6,7 +6,7 @@ angular.module('500px', [
   '500px.controllers',
   '500px.services',
   'ngCordova'
-]).run(function ($ionicPlatform) {
+]).run(function ($ionicPlatform, $cordovaStatusbar) {
   $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -15,8 +15,11 @@ angular.module('500px', [
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      //StatusBar.styleDefault();
     }
+
+    $cordovaStatusbar.overlaysWebView(true);
+    $cordovaStatusbar.style(1);
   });
 }).config(function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/login');
@@ -46,6 +49,15 @@ angular.module('500px', [
         'tab-favourites': {
           templateUrl: 'templates/tab-favourites.html',
           controller: 'FavouritesCtrl'
+        }
+      }
+    })
+    .state('tab.settings', {
+      url: '/settings',
+      views: {
+        'tab-profile': {
+          templateUrl: 'templates/tab-settings.html',
+          controller: 'SettingsCtrl'
         }
       }
     })

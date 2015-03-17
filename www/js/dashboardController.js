@@ -6,7 +6,7 @@ angular.module('500px.controllers')
     var mt = ($window.innerHeight - $window.innerWidth - 100) / 2;
 
     $scope.imgStyles = {
-      'margin-top': mt+'px'
+      'margin-top': mt + 'px'
     };
 
     //todo: get gesture action from user settings
@@ -39,19 +39,19 @@ angular.module('500px.controllers')
       });
     }
 
-    function setActive(){
-      if(cards.length === 6){
+    function setActive() {
+      if (cards.length === 6) {
         loadMore();
       }
 
-      if(cards.length === 2){
+      if (cards.length === 2) {
         $ionicLoading.show({template: 'Loading...'});
       }
-      cards.splice(0,1);
+      cards.splice(0, 1);
       $scope.activeImage = cards[0];
     }
 
-    function next(){
+    function next() {
       setActive();
     }
 
@@ -59,10 +59,9 @@ angular.module('500px.controllers')
       var img = $scope.activeImage;
       setActive();
       _500px.api('/photos/' + img.id + '/favorite', 'post', function (response) {
-      //  if (!response.error && response.data.photo) {
-          //ImageService.setFav([response.data.photo], true);
-          //ImageService.buildRows();
-        //}
+        if (!response.error && response.data.photo) {
+          ImageService.updateFavRows(response.data.photo);
+        }
       });
     }
 

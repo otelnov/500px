@@ -3,13 +3,9 @@ angular.module('500px.controllers')
   .controller('FavouritesCtrl', function ($scope, $ionicLoading, UserService,
                                           $state, ImageService) {
     UserService.current().then(function (user) {
-      if (!user) {
-        return $state.go('login');
-      }
-      //$scope.rows = [];
-      $scope.rows = ImageService.getRows();
       var page = 0;
       $scope.hasMoreData = true;
+      var count = 21;
 
       $scope.loadMore = function () {
         page++;
@@ -18,20 +14,23 @@ angular.module('500px.controllers')
           user_id: user.id,
           page: page,
           image_size: 2,
+          rpp: count,
           sort: 'created_at'
         }, function (response) {
-          ImageService.setFav(response.data.photos).then(function (res) {
-            if (res.stop) {
-              $scope.hasMoreData = false;
-            }
-            //else{
-            //  $scope.rows = $scope.rows.length > 0
-            //    ? $scope.rows.concat(res.rows)
-            //    : res.rows;
-            //
-            //}
-            $ionicLoading.hide();
+          if (response.data.photos.length < count) {
+            $scope.hasMoreData = false;
+            //$scope.$broadcast('scroll.infiniteScrollComplete');
+            //$ionicLoading.hide();
+          }
+
+          if (response.data.photos.length === 0) {
+            return;
+          }
+
+          ImageService.genFavRows(response.data.photos).then(function (rows) {
+            $scope.rows = rows;
             $scope.$broadcast('scroll.infiniteScrollComplete');
+            $ionicLoading.hide();
           });
         });
       };
