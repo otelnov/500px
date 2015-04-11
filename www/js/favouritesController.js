@@ -1,8 +1,8 @@
 angular.module('500px.controllers')
 
-  .controller('FavouritesCtrl', function ($scope, $ionicLoading, UserService,
+  .controller('FavouritesCtrl', function ($scope, $ionicLoading, UserFactory,
                                           $state, ImageService) {
-    UserService.current().then(function (user) {
+    UserFactory.getUser().then(function (user) {
       var page = 0;
       $scope.hasMoreData = true;
       var count = 21;
