@@ -1,13 +1,13 @@
-.login-page{
+.login-page {
   background: url("../img/login.jpg") no-repeat;
   background-size: cover;
 }
 
-.favourites img{
+.favourites img {
   width: 100%;
 }
 
-.favourites, .dashboard{
+.favourites, .dashboard {
   background: #121212;
 }
 
@@ -20,6 +20,10 @@
   padding-bottom: 0;
 }
 
-.dashboard img{
+.dashboard img {
+  width: 100%;
+}
+
+.favourite-view img {
   width: 100%;
 }

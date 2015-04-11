@@ -1,5 +1,5 @@
 (function () {
-  function _ImageService($q) {
+  function _ImageService($q, UserService) {
 
     var favouriteRows = [];
     var favourites = [];
@@ -32,14 +32,52 @@
       }
     }
 
+    function getFavourites() {
+      return favourites;
+    }
+
+    var page = 0;
+    var count = 21;
+
+    function loadMoreFavs(cb) {
+      var data = {hasMoreData: true};
+      page++;
+      UserService.current().then(function (user) {
+        _500px.api('/photos', {
+          feature: 'user_favorites',
+          user_id: user.id,
+          page: page,
+          image_size: [2, 4],
+          rpp: count,
+          sort: 'created_at'
+        }, function (response) {
+          if (response.data.photos.length < count) {
+            data.hasMoreData = false;
+          }
+
+          if (response.data.photos.length === 0) {
+            return cb(data);
+          }
+
+          genFavRows(response.data.photos).then(function (rows) {
+            data.rows = rows;
+            cb(data);
+          });
+        });
+      });
+    }
+
     return {
       genFavRows: genFavRows,
       favRows: favouriteRows,
-      updateFavRows: updateFavRows
+      updateFavRows: updateFavRows,
+      getFavourites: getFavourites,
+      loadMoreFavs: loadMoreFavs
     };
   }
-  _ImageService.$inject = ["$q"];
 
-  angular.module("500px.services")
+  _ImageService.$inject = ['$q', 'UserService'];
+
+  angular.module('500px.services')
     .service("ImageService", _ImageService);
 })();
