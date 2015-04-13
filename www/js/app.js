@@ -64,15 +64,15 @@ angular.module('500px', [
         }
       }
     })
-    .state('tab.favourites_view', {
-      url: '/favourites/:id',
-      views: {
-        'tab-favourites': {
-          templateUrl: 'templates/favourites-view.html',
-          controller: 'FavouritesViewCtrl'
-        }
-      }
-    })
+    //.state('tab.favourites_view', {
+    //  url: '/favourites/:id',
+    //  views: {
+    //    'tab-favourites': {
+    //      templateUrl: 'templates/favourites-view.html',
+    //      controller: 'FavouritesViewCtrl'
+    //    }
+    //  }
+    //})
     .state('tab.settings', {
       url: '/settings',
       views: {
