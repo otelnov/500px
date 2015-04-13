@@ -47,6 +47,8 @@
           rpp: count,
           sort: 'created_at'
         }, function (response) {
+          data.favs = favourites;
+
           if (response.data.photos.length < count) {
             data.hasMoreData = false;
           }
@@ -57,7 +59,6 @@
 
           genFavRows(response.data.photos).then(function (rows) {
             data.rows = rows;
-            data.favs = favourites;
             cb(data);
           });
         });
