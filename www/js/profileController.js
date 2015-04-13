@@ -9,6 +9,7 @@
     function init() {
       UserFactory.getUser().then(function(user) {
         $scope.user = user;
+        $scope.user.avatarUrl = UserFactory.getAvatar();
       });
     }
 

@@ -11,7 +11,8 @@
     return {
       login: login,
       logout: logout,
-      getUser: getUser
+      getUser: getUser,
+      getAvatar: getAvatar
     };
 
     function login() {
@@ -60,6 +61,23 @@
       }
 
       return deferred.promise;
+    }
+
+    function getAvatar(size) {
+      if(!user) {
+        return;
+      }
+
+      size = size || 512;
+      var avatarUrl = user.userpic_https_url;
+
+      if(avatarUrl.indexOf("facebook") !== -1) {
+        avatarUrl = avatarUrl
+          .replace(/width=\d+/g, "width=" + size)
+          .replace(/height=\d+/g, "height=" + size);
+      }
+
+      return avatarUrl;
     }
   }
   UserFactory.$inject = ["$http", "$q", "AuthTokenFactory"];
