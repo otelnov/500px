@@ -201,7 +201,7 @@
           fire_event('authorization_obtained');
 
           if (callback && typeof callback == 'function') {
-            callback.call(self, 'authorized');
+            callback.call(self, 'authorized', oauth_token);
           }
 
           browserRef.close();
@@ -213,6 +213,18 @@
           callback.call(self, 'dismiss');
         }
       });
+    };
+
+    this.getToken = function() {
+      return oauth_token;
+    };
+
+    this.setToken = function(token) {
+      if(oauth_token) {
+        return;
+      }
+
+      oauth_token = token;
     };
 
     // authorize(callback)

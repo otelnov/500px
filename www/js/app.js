@@ -28,7 +28,19 @@ angular.module('500px', [
     .state('login', {
       url: '/login',
       templateUrl: 'templates/login.html',
-      controller: 'LoginCtrl'
+      controller: 'LoginCtrl',
+      resolve: {
+        user: ["$q", "$state", "UserFactory", function($q, $state, UserFactory) {
+          var deferred = $q.defer();
+          UserFactory.getUser().then(function(user) {
+            $state.go("tab.dash");
+          }, function() {
+            deferred.resolve();
+          });
+
+          return deferred.promise;
+        }]
+      }
     })
     .state('tab', {
       abstract: true,
@@ -79,4 +91,9 @@ angular.module('500px', [
         }
       }
     });
+})
+.run(function() {
+  _500px.init({
+    sdk_key: "b4512a8c50b7f1cbea9765e16d0552095847d76d"
+  });
 });

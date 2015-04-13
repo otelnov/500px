@@ -1,7 +1,6 @@
 angular.module('500px.controllers')
 
-  .controller('FavouritesCtrl', function ($scope, $ionicLoading, UserService,
-                                          $state, ImageService) {
+  .controller('FavouritesCtrl', function ($scope, $ionicLoading, $state, ImageService) {
     $scope.hasMoreData = true;
 
     $scope.loadMore = function () {
