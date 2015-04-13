@@ -68,7 +68,7 @@
         return;
       }
 
-      size = size || 512;
+      size = size || 256;
       var avatarUrl = user.userpic_https_url;
 
       if(avatarUrl.indexOf("facebook") !== -1) {
