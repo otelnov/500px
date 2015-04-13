@@ -37,18 +37,8 @@
     }
 
     function logout() {
-      var deferred = $q.defer();
-
-      _500px.logout(function(status) {
-        if(status === "logged_out") {
-          AuthTokenFactory.setToken();
-          deferred.resolve();
-        } else {
-          deferred.reject(status);
-        }
-      });
-
-      return deferred.promise;
+      user = null;
+      AuthTokenFactory.setToken();
     }
 
     function getUser() {

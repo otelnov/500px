@@ -9,11 +9,22 @@
 
   <ion-content>
 
-    <!-- <div class="row" ng-repeat="row in rows">
-      <div class="col col-33" ng-repeat="fav in row">
-        <img ng-src="{{fav.image_url}}" alt="fav.name"/>
+    <div id="profile-bg"></div>
+    <div id="content">
+      <div id="profile-info">
+        <img id="profile-image" ng-src="{{::user.userpic_https_url}}">
+        <h3 id="profile-name" ng-bind="::user.fullname"></h3>
+        <span id="profile-description" ng-bind="::user.domain"></span>
       </div>
-    </div> -->
+    </div>
+
+    <div class="row text-center">
+      <div class="col">
+        <button class="button button-outline button-assertive" ng-click="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
 
   </ion-content>
 </ion-view>
