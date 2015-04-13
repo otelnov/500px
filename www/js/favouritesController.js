@@ -1,10 +1,12 @@
 angular.module('500px.controllers')
 
-  .controller('FavouritesCtrl', function ($scope, $ionicLoading, $state, ImageService) {
-    $scope.hasMoreData = true;
+  .controller('FavouritesCtrl', function ($scope, $ionicLoading, $state, ImageService,
+                                          $ionicModal, $ionicSlideBoxDelegate, $timeout) {
 
+    $scope.hasMoreData = true;
     $scope.loadMore = function () {
       ImageService.loadMoreFavs(function (data) {
+        $scope.slider = data.favs;
         $scope.hasMoreData = data.hasMoreData;
         if (data.rows) {
           $scope.rows = data.rows;
@@ -13,27 +15,53 @@ angular.module('500px.controllers')
         $ionicLoading.hide();
       });
     };
-  })
-  .controller('FavouritesViewCtrl', function ($scope, $ionicLoading, ImageService, $state, $ionicSlideBoxDelegate) {
-    var id = $state.params.id;
-    var favs = ImageService.getFavourites();
-    favs.forEach(function (img, index) {
-      if (img.id.toString() === id.toString()) {
-        $scope.activeImage = index;
-        $scope.title = img.name;
-      }
-    });
-    $scope.favourites = favs;
 
-    $scope.slide = function (i) {
-      if (favs.length <= i + 5) {
-        ImageService.loadMoreFavs(function (data) {
-          favs = ImageService.getFavourites();
-          $scope.favourites = favs;
-          $ionicSlideBoxDelegate.update();
-        });
-      }
+    $ionicModal.fromTemplateUrl('slider-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function (modal) {
+      $scope.modal = modal;
+    });
+
+    $scope.openModal = function (id) {
+      $scope.slider.forEach(function (img, index) {
+        if (img.id.toString() === id.toString()) {
+          $scope.modal.activeImage = index;
+        }
+      });
+      $ionicSlideBoxDelegate.update();
+      $scope.modal.show();
     };
 
+    var isNotDoubleTap = true;
+    $scope.zoom = function () {
+      isNotDoubleTap = false;
+      console.log('double tap');
+    };
+
+    var timeout;
+    $scope.close = function () {
+      if (timeout) {
+        $timeout.cancel(timeout);
+      }
+      timeout = $timeout(function () {
+        if (isNotDoubleTap) {
+          $scope.closeModal();
+        }
+        isNotDoubleTap = true;
+      }, 300);
+    };
+
+    $scope.closeModal = function () {
+      $scope.modal.hide();
+    };
+
+    $scope.$on('$destroy', function () {
+      $scope.modal.remove();
+    });
+
+    $scope.$on('modal.shown', function () {
+      console.log('Modal is shown!');
+    });
 
   });

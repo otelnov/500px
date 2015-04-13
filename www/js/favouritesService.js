@@ -61,6 +61,7 @@
 
           genFavRows(response.data.photos).then(function (rows) {
             data.rows = rows;
+            data.favs = favourites;
             cb(data);
           });
         });
