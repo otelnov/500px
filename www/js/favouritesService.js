@@ -32,10 +32,6 @@
       }
     }
 
-    function getFavourites() {
-      return favourites;
-    }
-
     var page = 0;
     var count = 21;
 
@@ -72,7 +68,6 @@
       genFavRows: genFavRows,
       favRows: favouriteRows,
       updateFavRows: updateFavRows,
-      getFavourites: getFavourites,
       loadMoreFavs: loadMoreFavs
     };
   }

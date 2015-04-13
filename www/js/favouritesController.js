@@ -64,4 +64,14 @@ angular.module('500px.controllers')
       console.log('Modal is shown!');
     });
 
+    $scope.slideChanged = function (i) {
+      if ($scope.slider.length <= i + 5) {
+        ImageService.loadMoreFavs(function (data) {
+          $scope.slider = data.favs;
+          $ionicSlideBoxDelegate.update();
+        });
+      }
+    };
+
   });
+
