@@ -1,5 +1,5 @@
 (function () {
-  function _ImageService($q, UserService) {
+  function _ImageService($q, UserFactory) {
 
     var favouriteRows = [];
     var favourites = [];
@@ -42,7 +42,7 @@
     function loadMoreFavs(cb) {
       var data = {hasMoreData: true};
       page++;
-      UserService.current().then(function (user) {
+      UserFactory.getUser().then(function (user) {
         _500px.api('/photos', {
           feature: 'user_favorites',
           user_id: user.id,
@@ -76,7 +76,7 @@
     };
   }
 
-  _ImageService.$inject = ['$q', 'UserService'];
+  _ImageService.$inject = ['$q', 'UserFactory'];
 
   angular.module('500px.services')
     .service("ImageService", _ImageService);

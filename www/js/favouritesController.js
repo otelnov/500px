@@ -14,8 +14,7 @@ angular.module('500px.controllers')
       });
     };
   })
-  .controller('FavouritesViewCtrl', function ($scope, $ionicLoading, UserService,
-                                              ImageService, $state, $ionicSlideBoxDelegate) {
+  .controller('FavouritesViewCtrl', function ($scope, $ionicLoading, ImageService, $state, $ionicSlideBoxDelegate) {
     var id = $state.params.id;
     var favs = ImageService.getFavourites();
     favs.forEach(function (img, index) {
