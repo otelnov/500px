@@ -9,20 +9,22 @@
 
   <ion-content>
 
-    <div id="profile-bg"></div>
-    <div id="content">
-      <div id="profile-info">
-        <img id="profile-image" ng-src="{{::user.avatarUrl}}">
-        <h3 id="profile-name" ng-bind="::user.fullname"></h3>
-        <span id="profile-description" ng-bind="::user.domain"></span>
+    <div class="user-card">
+      <div class="profile-bg"></div>
+      <div class="content">
+        <div class="profile-info">
+          <img class="profile-image" ng-src="{{::user.avatarUrl}}">
+          <h3 class="profile-name" ng-bind="::user.fullname"></h3>
+          <span class="profile-description" ng-bind="::user.domain"></span>
+        </div>
       </div>
-    </div>
 
-    <div class="row text-center">
-      <div class="col">
-        <button class="button button-outline button-assertive" ng-click="logout()">
-          Logout
-        </button>
+      <div class="row text-center">
+        <div class="col">
+          <button class="button button-outline button-assertive" ng-click="logout()">
+            Logout
+          </button>
+        </div>
       </div>
     </div>
 
