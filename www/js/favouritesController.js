@@ -73,5 +73,12 @@ angular.module('500px.controllers')
       }
     };
 
+    $scope.getImageLink = function (image, index) {
+      if (index != $ionicSlideBoxDelegate.currentIndex()) {
+        return;
+      }
+      return image.image_url[1];
+    };
+
   });
 

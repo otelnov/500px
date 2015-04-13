@@ -23,15 +23,7 @@
            on-tap="close()" on-double-tap="zoom()" on-swipe-down="closeModal()">
         <ion-slide-box on-slide-changed="slideChanged(index)" active-slide="modal.activeImage">
           <ion-slide ng-repeat="image in slider">
-
-            <img ng-src="{{image.image_url[1]}}" class="fullscreen-image" alt=""/>
-
-            <!--<div class="container" class="scrollCanvas">-->
-            <!--<ion-scroll class="scrollCanvas" zooming="true" min-zoom="1" direction="xy" locked="false">-->
-            <!--<div class="image" style="background-image: url( {{i.image_url[1]}} )"></div>-->
-            <!--</ion-scroll>-->
-            <!--</div>-->
-
+            <img ng-src="{{getImageLink(image, $index)}}" class="fullscreen-image" alt=""/>
           </ion-slide>
         </ion-slide-box>
       </div>
